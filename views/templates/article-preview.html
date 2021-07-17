@@ -1,0 +1,15 @@
+<section class="section">
+  <div class="columns">
+    <a class="column is-full" href="/views/md-article.html?articleName={{ slug }}">
+      <div class="tile">
+        <article class="tile is-child notification is-primary">
+          <p class="title">{{ title }} - {{ dateCreated }}</p>
+          <figure class="image article-thumbnail">
+            <img src="{{ thumbnailUrl }}" width="100px" height="100" />
+          </figure>
+          <p class="subtitle">{{ summary }}</p>
+        </article>
+      </div>
+    </a>
+  </div>
+</section>

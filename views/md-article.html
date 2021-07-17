@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>unnamed-project - Articles</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/css/dark-theme.css" />
+  </head>
+  <body>
+    <!-- TODO will be gross duplicate html code, either switch to a proper component design -->
+    <!-- Or use a html templating engine like nunjuncks -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/index.html">
+          <img src="/assets/images/logo.png" width="50px" />
+        </a>
+
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/index.html"> Home </a>
+          <a class="navbar-item" href="/views/articles.html"> Articles </a>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Something</strong>
+              </a>
+              <a class="button is-light"> Something Else </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="section" id="article-content"></section>
+    <script src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+    <!-- TODO - components would be good here once again, for now we'll do some hacky javascript -->
+    <script>
+      var conv = new showdown.Converter({ metadata: true });
+      async function renderArticle() {
+        const params = new URLSearchParams(window.location.search);
+        var markdownContentReq = await fetch(
+          `/assets/articles/${params.get("articleName")}`
+        );
+        var markdownContent = await markdownContentReq.text();
+        var html = conv.makeHtml(markdownContent);
+        var metadata = conv.getMetadata();
+        // TODO - not bothering with metadata for poc - set the title, etc
+        document.getElementById("article-content").innerHTML = html;
+      }
+      renderArticle();
+    </script>
+  </body>
+</html>
