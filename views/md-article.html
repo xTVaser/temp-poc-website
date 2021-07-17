@@ -58,7 +58,7 @@
       async function renderArticle() {
         const params = new URLSearchParams(window.location.search);
         var markdownContentReq = await fetch(
-          `/assets/articles/${params.get("articleName")}`
+          `../assets/articles/${params.get("articleName")}`
         );
         var markdownContent = await markdownContentReq.text();
         var html = conv.makeHtml(markdownContent);

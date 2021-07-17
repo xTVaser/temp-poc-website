@@ -2,7 +2,7 @@
 title: Article Title - Test 2
 dateCreated: 2021-06-17
 summary: A much bigger test file, no markdown styling has been done yet
-thumbnailUrl: /assets/images/test.png
+thumbnailUrl: ../assets/images/test.png
 revision: TODO - would help with cache busting
 ---
 ![Showdown][sd-logo]
